@@ -1,0 +1,60 @@
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card shadow p-5">
+          <div class="card-body">
+            <h4 class="card-title">Add Product</h4>
+            <p class="card-description">
+              Basic form elements
+            </p>
+            <form class="forms-sample" enctype="multipart/form-data" method="post" action="add-product">
+              <div class="form-group">
+                <label for="exampleInputName1">title</label>
+                <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder="Product Title"
+                  required>
+              </div>
+              <!-- <div class="form-group">
+                <label for="exampleInputEmail3">Brand</label>
+                <input type="text" name="brand" class="form-control" placeholder="Brand Name" required>
+              </div> -->
+              <div class="form-group">
+                <label for="exampleInputPassword4">Price</label>
+                <input type="number" name="price" class="form-control" placeholder="Price in rupees" required>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleSelectGender">Category</label>
+                <select class="form-control" name="category">
+                  <% categories.forEach(category => { %>                  
+                  <option value="<%= category.categoryTitle %>">
+                    <%=  category.categoryTitle %>
+                  </option>
+                  <% }) %>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="formFile1" class="form-label">Select 4 Images</label>
+                <input class="form-control" name="image1" type="file" id="formFile1" multiple required>
+
+
+
+                <div class="form-group">
+                  <label for="exampleTextarea1">Description</label>
+                  <textarea class="form-control" name="description" id="exampleTextarea1" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="exampleTextarea1">Stock</label>
+                  <input class="form-control" type="number" min="0" name="stock" id="" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary mr-2">Add Product</button>
+                <button class="btn btn-light">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

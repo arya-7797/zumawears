@@ -1,0 +1,82 @@
+<div class="mt-5 pt-5">
+    <div class="row justify-content-center mt-5 mb-5">
+        <div class="col-md-6">
+            <div class="card w-75 mx-5">
+                <div class="card-header text-center">
+                    <h1 class="font-weight-bold">Login</h1>
+                </div>
+                <div class="card-body">
+                    <form class="form-horizontal" method="post" action="/otp-verify">
+						<% if(locals.error){ 
+							console.log('error he vroo');
+							%> 
+							<div class="form-group alert alert-danger w-100 d-flex justify-content-center align-items-center  mt-3" style="height: 40px; padding:0; " role="alert"><%= msg %> </div> 
+						<% } %>
+                            <div class="form-group">
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="otp" id="otp" placeholder="Enter your otp here" />
+                                    </div>
+                                    <% if(locals.phone){ %>
+                                        <input type="text" class="form-control d-none" name="phone" value="<%= phone %>" id="" placeholder="" />
+                                        
+                                        <% } %>
+                                 </div>
+                            </div>
+                            <div class="form-group ">
+                                <button type="submit"id="btnValidate" class="btn btn-primary btn-lg btn-block login-button">Submit</button>
+                                
+                            </div>
+                    </form>
+                    <div id="count" class="mt-1"></div>
+
+                    <button type="button" id="btnResend" onclick="resendOTP('<%= userDetails.phone %>')" disabled class="btn btn-primary btn-lg btn-block login-button">Resend</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+      // Get refreence to span and button
+    var spn = document.getElementById("count");
+    var resend = document.getElementById("btnResend");
+    var validate = document.getElementById("btnValidate")
+    
+    var count = 30;     // Set count
+    var timer = null;  // For referencing the timer
+    
+    (function countDown(){
+      // Display counter and start counting down
+      spn.textContent = count;
+      
+      // Run the function again every second if the count is not zero
+      if(count !== 0){
+        timer = setTimeout(countDown, 1000);
+        count--; // decrease the timer
+      } else {
+        // Enable the button
+        resend.removeAttribute("disabled");
+        validate.setAttribute("disabled","true")
+      }
+    }());
+    
+
+    function resendOTP(phno){
+    $.ajax({
+      url:'/otp-login',
+      data:{
+        phno
+      },
+      method:'post',
+      success:(response)=>{
+        location.reload()
+      }
+    })
+  }
+
+</script>
