@@ -37,7 +37,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 const mongoose=require('mongoose')
-mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser:true})
+// mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser:true})
+mongoose.connect('mongodb+srv://arya:bin9074@cluster0.z25oapc.mongodb.net/homedecore',{useNewUrlParser:true})
 const db= mongoose.connection
 db.on('error',error => console.error(error))
 db.once('open',() => console.error('Connected to Mongoose'))
